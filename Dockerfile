@@ -1,5 +1,5 @@
 # Container image that runs your code
-FROM ghcr.io/xu-cheng/texlive-small:latest
+FROM ghcr.io/xu-cheng/texlive-full:latest
 
 WORKDIR /root
 
