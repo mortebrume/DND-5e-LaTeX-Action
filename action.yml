@@ -1,5 +1,5 @@
-name: DnD LaTeX compilation
-description: Compiles latex documents using pdflatex, lualatex, xelatex. Full TeXLive distribution.
+name: 'DND-5e-LaTeX-Action'
+description: 'Uses XeLaTeX to compile DND character sheets'
 author: Cheng XU, Mathew Savage
 inputs:
   root_file:
