@@ -1,16 +1,33 @@
-# action.yml
-name: 'DND-5e-LaTeX-Action'
-description: 'Uses XeLaTeX to compile DND character sheets'
+name: DnD LaTeX compilation
+description: Compiles latex documents using pdflatex, lualatex, xelatex. Full TeXLive distribution.
+author: Cheng XU, Mathew Savage
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  root_file:
+    description: The root LaTeX file to be compiled, if unset will run on all .tex documents in the working_directory
+    required: false
+  working_directory:
+    description: The working directory for the latex compiler to be invoked
+  compiler:
+    description: LaTeX engine to be used
+    default: latexmk
   args:
-    - ${{ inputs.who-to-greet }}
+    description: Extra arguments to be passed to the latex compiler
+    default: "-pdf -latexoption=-file-line-error -latexoption=-interaction=nonstopmode"
+  extra_system_packages:
+    description: Install extra packages by apt-get
+  runs:
+    descrption: Number of times to run the compilation
+    default: 1
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.root_file }}
+    - ${{ inputs.working_directory }}
+    - ${{ inputs.compiler }}
+    - ${{ inputs.args }}
+    - ${{ inputs.extra_system_packages }}
+    - ${{ inputs.runs }}
+branding:
+  icon: book
+  color: blue
