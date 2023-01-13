@@ -11,7 +11,7 @@ WORKDIR /root/DND-5e-LaTeX-Action
 RUN git submodule init
 RUN git submodule update
 RUN mkdir -p /root/texmf/tex/latex
-COPY submodules/dnd /root/texmf/tex/latex/dnd/
+RUN mv submodules/dnd /root/texmf/tex/latex/
 
 # Install all LaTeX packages listed in the dnd sty
 RUN tlmgr install `cat /root/texmf/tex/latex/dnd/packages.txt | grep "^[^#]"`
