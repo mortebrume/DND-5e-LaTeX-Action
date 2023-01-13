@@ -3,6 +3,9 @@ FROM ghcr.io/xu-cheng/texlive-full:latest
 
 WORKDIR /root
 
+RUN apk update
+RUN apk add git
+
 RUN git clone https://github.com/matsavage/DND-5e-LaTeX-Action.git
 WORKDIR /root/DND-5e-LaTeX-Action
 RUN git submodule init
