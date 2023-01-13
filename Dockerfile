@@ -3,6 +3,11 @@ FROM ghcr.io/xu-cheng/texlive-full:latest
 
 WORKDIR /root
 
+RUN git clone https://github.com/matsavage/DND-5e-LaTeX-Action.git
+WORKDIR /root/DND-5e-LaTeX-Action
+RUN git submodule init
+RUN git submodule update
+RUN mkdir -p /root/texmf/tex/latex
 COPY submodules/dnd /root/texmf/tex/latex/dnd/
 
 # Install all LaTeX packages listed in the dnd sty
@@ -22,7 +27,8 @@ RUN tlmgr install \
     minifp \
     kpfonts-otf
 
-COPY entrypoint.sh entrypoint.sh
+COPY entrypoint.sh /root/
+WORKDIR /root
 
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/root/entrypoint.sh"]
